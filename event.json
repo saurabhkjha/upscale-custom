@@ -1,0 +1,21 @@
+[
+    {
+        "eventType": "product_detail_description_click",
+        "keys": {
+          "product.description": "pd-product",
+          "product.id": "pd-product-id"
+        }
+    },
+    {
+      "eventType": "product_detail_component_init",
+      "keys": {
+        "product.id": "pd-init-product-id"
+      }
+  },
+  {
+    "eventType": "storybook_product_click",
+    "keys": {
+      "product.name": "product-name"
+    }
+}
+]
