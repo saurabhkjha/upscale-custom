@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { GoogleTagManagerService } from 'angular-google-tag-manager';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   events: Array<any> = [];
+
+  constructor(private gtmService: GoogleTagManagerService) { }
 
   ngOnInit(): void {
     window.parent.postMessage({ type: 'initialized' }, '*');
@@ -21,6 +23,30 @@ export class AppComponent implements OnInit {
   }
 
   handleEvent(event: any) {
-    console.log('event received: ', event);
+    console.log('=== event received: ', event);
+    const gtmTag = {
+      event: '',
+      data: '',
+    };
+    if (event.data.eventType === 'component_context') {
+      gtmTag.event = event.data.eventType;
+      gtmTag.data = event.data.keys.experienceId;
+      this.gtmService.pushTag(gtmTag);
+      alert('this is a custom event: ' + event.data.eventType);
+    }
+    if (event.data.eventType === 'cart_component_init') {
+      gtmTag.event = event.data.eventType;
+      gtmTag.data = event.data.keys.order.orderId;
+      this.gtmService.pushTag(gtmTag);
+      alert('this is a custom event: ' + event.data.eventType);
+    }
+    if (event.data.eventType === 'cart_reset') {
+      gtmTag.event = event.data.eventType;
+      gtmTag.data = event.data.keys.order.orderId;
+      this.gtmService.pushTag(gtmTag);
+      alert('this is a custom event: ' + event.data.eventType);
+    }
+
+
   }
 }

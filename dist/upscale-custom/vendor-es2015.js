@@ -53652,6 +53652,236 @@ const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('9.1.1
 
 /***/ }),
 
+/***/ "./node_modules/angular-google-tag-manager/__ivy_ngcc__/fesm2015/angular-google-tag-manager.js":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/angular-google-tag-manager/__ivy_ngcc__/fesm2015/angular-google-tag-manager.js ***!
+  \*****************************************************************************************************/
+/*! exports provided: GoogleTagManagerModule, GoogleTagManagerService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleTagManagerModule", function() { return GoogleTagManagerModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoogleTagManagerService", function() { return GoogleTagManagerService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/angular-google-tag-manager.service.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+class GoogleTagManagerService {
+    /**
+     * @param {?=} config
+     * @param {?=} googleTagManagerId
+     * @param {?=} googleTagManagerAuth
+     * @param {?=} googleTagManagerPreview
+     */
+    constructor(config = { id: null }, googleTagManagerId, googleTagManagerAuth, googleTagManagerPreview) {
+        this.config = config;
+        this.googleTagManagerId = googleTagManagerId;
+        this.googleTagManagerAuth = googleTagManagerAuth;
+        this.googleTagManagerPreview = googleTagManagerPreview;
+        this.isLoaded = false;
+        this.browserGlobals = {
+            /**
+             * @return {?}
+             */
+            windowRef() {
+                return window;
+            },
+            /**
+             * @return {?}
+             */
+            documentRef() {
+                return document;
+            },
+        };
+        if (this.config == null) {
+            this.config = { id: null };
+        }
+        this.config = Object.assign(Object.assign({}, this.config), { id: googleTagManagerId || this.config.id, gtm_auth: googleTagManagerAuth || this.config['gtm_auth'], gtm_preview: googleTagManagerPreview || this.config['gtm_preview'] });
+        if (this.config.id == null) {
+            throw new Error('Google tag manager ID not provided.');
+        }
+    }
+    /**
+     * @return {?}
+     */
+    getDataLayer() {
+        /** @type {?} */
+        const window = this.browserGlobals.windowRef();
+        window['dataLayer'] = window['dataLayer'] || [];
+        return window['dataLayer'];
+    }
+    /**
+     * @private
+     * @param {?} obj
+     * @return {?}
+     */
+    pushOnDataLayer(obj) {
+        /** @type {?} */
+        const dataLayer = this.getDataLayer();
+        dataLayer.push(obj);
+    }
+    /**
+     * @return {?}
+     */
+    addGtmToDom() {
+        if (this.isLoaded) {
+            return;
+        }
+        /** @type {?} */
+        const doc = this.browserGlobals.documentRef();
+        this.pushOnDataLayer({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js',
+        });
+        /** @type {?} */
+        const gtmScript = doc.createElement('script');
+        gtmScript.id = 'GTMscript';
+        gtmScript.async = true;
+        gtmScript.src = this.applyGtmQueryParams('//www.googletagmanager.com/gtm.js');
+        doc.head.insertBefore(gtmScript, doc.head.firstChild);
+        /** @type {?} */
+        const ifrm = doc.createElement('iframe');
+        ifrm.setAttribute('src', this.applyGtmQueryParams('//www.googletagmanager.com/ns.html'));
+        ifrm.style.width = '0';
+        ifrm.style.height = '0';
+        ifrm.style.display = 'none';
+        ifrm.style.visibility = 'hidden';
+        /** @type {?} */
+        const noscript = doc.createElement('noscript');
+        noscript.id = 'GTMiframe';
+        noscript.appendChild(ifrm);
+        doc.body.insertBefore(noscript, doc.body.firstChild);
+        this.isLoaded = true;
+    }
+    /**
+     * @param {?} item
+     * @return {?}
+     */
+    pushTag(item) {
+        if (!this.isLoaded) {
+            this.addGtmToDom();
+        }
+        this.pushOnDataLayer(item);
+    }
+    /**
+     * @private
+     * @param {?} url
+     * @return {?}
+     */
+    applyGtmQueryParams(url) {
+        if (url.indexOf('?') === -1) {
+            url += '?';
+        }
+        return (url +
+            Object.keys(this.config)
+                .filter((/**
+             * @param {?} k
+             * @return {?}
+             */
+            (k) => this.config[k]))
+                .map((/**
+             * @param {?} k
+             * @return {?}
+             */
+            (k) => `${k}=${this.config[k]}`))
+                .join('&'));
+    }
+}
+GoogleTagManagerService.ɵfac = function GoogleTagManagerService_Factory(t) { return new (t || GoogleTagManagerService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"]('googleTagManagerConfig', 8), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"]('googleTagManagerId', 8), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"]('googleTagManagerAuth', 8), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"]('googleTagManagerPreview', 8)); };
+/** @nocollapse */
+GoogleTagManagerService.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: ['googleTagManagerConfig',] }] },
+    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: ['googleTagManagerId',] }] },
+    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: ['googleTagManagerAuth',] }] },
+    { type: String, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: ['googleTagManagerPreview',] }] }
+];
+/** @nocollapse */ GoogleTagManagerService.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"])({ factory: function GoogleTagManagerService_Factory() { return new GoogleTagManagerService(Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"])("googleTagManagerConfig", 8), Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"])("googleTagManagerId", 8), Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"])("googleTagManagerAuth", 8), Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"])("googleTagManagerPreview", 8)); }, token: GoogleTagManagerService, providedIn: "root" });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](GoogleTagManagerService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: undefined, decorators: [{
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
+            }, {
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"],
+                args: ['googleTagManagerConfig']
+            }] }, { type: String, decorators: [{
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
+            }, {
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"],
+                args: ['googleTagManagerId']
+            }] }, { type: String, decorators: [{
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
+            }, {
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"],
+                args: ['googleTagManagerAuth']
+            }] }, { type: String, decorators: [{
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"]
+            }, {
+                type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"],
+                args: ['googleTagManagerPreview']
+            }] }]; }, null); })();
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/angular-google-tag-manager.module.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class GoogleTagManagerModule {
+    /**
+     * @param {?} config
+     * @return {?}
+     */
+    static forRoot(config) {
+        return {
+            ngModule: GoogleTagManagerModule,
+            providers: [{ provide: 'googleTagManagerConfig', useValue: config }],
+        };
+    }
+}
+GoogleTagManagerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: GoogleTagManagerModule });
+GoogleTagManagerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function GoogleTagManagerModule_Factory(t) { return new (t || GoogleTagManagerModule)(); } });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](GoogleTagManagerModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"]
+    }], null, null); })();
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/google-tag-manager-config.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function GoogleTagManagerConfig() { }
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: public-api.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: angular-google-tag-manager.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+
+//# sourceMappingURL=angular-google-tag-manager.js.map
+
+/***/ }),
+
 /***/ "./node_modules/rxjs/_esm2015/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/rxjs/_esm2015/index.js ***!

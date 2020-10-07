@@ -10,7 +10,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    {provide: 'googleTagManagerId', useValue: 'GTM-TQSDK33'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

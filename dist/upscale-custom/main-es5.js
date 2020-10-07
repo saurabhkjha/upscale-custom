@@ -60,11 +60,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var angular_google_tag_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! angular-google-tag-manager */
+    "./node_modules/angular-google-tag-manager/__ivy_ngcc__/fesm2015/angular-google-tag-manager.js");
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent() {
+      function AppComponent(gtmService) {
         _classCallCheck(this, AppComponent);
 
+        this.gtmService = gtmService;
         this.events = [];
       }
 
@@ -89,7 +96,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "handleEvent",
         value: function handleEvent(event) {
-          console.log('event received: ', event);
+          console.log('=== event received: ', event);
+          var gtmTag = {
+            event: '',
+            data: ''
+          };
+
+          if (event.data.eventType === 'component_context') {
+            gtmTag.event = event.data.eventType;
+            gtmTag.data = event.data.keys.experienceId;
+            this.gtmService.pushTag(gtmTag);
+            alert('this is a custom event: ' + event.data.eventType);
+          }
+
+          if (event.data.eventType === 'cart_component_init') {
+            gtmTag.event = event.data.eventType;
+            gtmTag.data = event.data.keys.order.orderId;
+            this.gtmService.pushTag(gtmTag);
+            alert('this is a custom event: ' + event.data.eventType);
+          }
+
+          if (event.data.eventType === 'cart_reset') {
+            gtmTag.event = event.data.eventType;
+            gtmTag.data = event.data.keys.order.orderId;
+            this.gtmService.pushTag(gtmTag);
+            alert('this is a custom event: ' + event.data.eventType);
+          }
         }
       }]);
 
@@ -97,24 +129,18 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }();
 
     AppComponent.ɵfac = function AppComponent_Factory(t) {
-      return new (t || AppComponent)();
+      return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](angular_google_tag_manager__WEBPACK_IMPORTED_MODULE_1__["GoogleTagManagerService"]));
     };
 
     AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: AppComponent,
       selectors: [["app-root"]],
-      decls: 3,
+      decls: 1,
       vars: 0,
-      consts: [[1, "custom"], ["src", "https://i.ytimg.com/vi/4lIZ0v4viI4/maxresdefault.jpg", "alt", "Capgemini", 1, "center"]],
+      consts: [[1, "custom"]],
       template: function AppComponent_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "img", 1);
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Custom component\n");
-
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "div", 0);
         }
       },
       styles: [".custom[_ngcontent-%COMP%] {\n  text-align: center;\n}\n\n.center[_ngcontent-%COMP%] {\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n  width: 50%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQzpcXFVzZXJzXFxzamhhMVxcRG9jdW1lbnRzXFx1cHNjYWxlXFx1cHNjYWxlLWN1c3RvbS9zcmNcXGFwcFxcYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBQTtBQ0NGOztBRENBO0VBQ0UsY0FBQTtFQUNBLGlCQUFBO0VBQ0Esa0JBQUE7RUFDQSxVQUFBO0FDRUYiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3VzdG9tIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuLmNlbnRlciB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luLWxlZnQ6IGF1dG87XHJcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xyXG4gIHdpZHRoOiA1MCU7XHJcbn1cclxuIiwiLmN1c3RvbSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuLmNlbnRlciB7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBtYXJnaW4tbGVmdDogYXV0bztcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xuICB3aWR0aDogNTAlO1xufSJdfQ== */"]
@@ -129,7 +155,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           templateUrl: './app.component.html',
           styleUrls: ['./app.component.scss']
         }]
-      }], null, null);
+      }], function () {
+        return [{
+          type: angular_google_tag_manager__WEBPACK_IMPORTED_MODULE_1__["GoogleTagManagerService"]
+        }];
+      }, null);
     })();
     /***/
 
@@ -185,7 +215,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       factory: function AppModule_Factory(t) {
         return new (t || AppModule)();
       },
-      providers: [],
+      providers: [{
+        provide: 'googleTagManagerId',
+        useValue: 'GTM-TQSDK33'
+      }],
       imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]]]
     });
 
@@ -204,7 +237,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         args: [{
           declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]],
           imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]],
-          providers: [],
+          providers: [{
+            provide: 'googleTagManagerId',
+            useValue: 'GTM-TQSDK33'
+          }],
           bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         }]
       }], null, null);
