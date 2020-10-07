@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     );
 
     window.addEventListener('message', (event) => {
-      this.handleEvent(event);
+     // this.handleEvent(event);
     });
   }
 
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
       data: '',
     };
     if (event.data.eventType === 'component_context') {
-      gtmTag.event = event.data.eventType;
+      gtmTag.event = 'reset_cart';
       gtmTag.data = event.data.keys.experienceId;
       this.gtmService.pushTag(gtmTag);
       alert('this is a custom event: ' + event.data.eventType);
@@ -41,12 +41,23 @@ export class AppComponent implements OnInit {
       alert('this is a custom event: ' + event.data.eventType);
     }
     if (event.data.eventType === 'cart_reset') {
-      gtmTag.event = event.data.eventType;
+      gtmTag.event = 'reset_cart';
       gtmTag.data = event.data.keys.order.orderId;
       this.gtmService.pushTag(gtmTag);
       alert('this is a custom event: ' + event.data.eventType);
     }
 
 
+  }
+
+  handleClick() {
+    const gtmTag = {
+      event: '',
+      data: '',
+    };
+    gtmTag.event = 'reset_cart';
+    gtmTag.data = "001";
+    this.gtmService.pushTag(gtmTag);
+    alert('this is a custom event: click btn');
   }
 }
